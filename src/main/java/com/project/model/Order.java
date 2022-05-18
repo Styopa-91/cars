@@ -1,5 +1,6 @@
 package com.project.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -20,21 +21,41 @@ public class Order {
     @Column(name = "description")
     private String description;
 
-
-
     @Column(name="created_at")
     @CreationTimestamp
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "ss-MM-yyyy hh:mm:ss")
     private Timestamp createdAt;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "car_id")
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "car_id", referencedColumnName = "id")
     private Car car;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Customer customer;
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "createdAt=" + createdAt +
+                ", car=" + car +
+                ", customer=" + customer +
+                '}';
+    }
 
     public String getDescription() {
         return description;
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public Car getCar() {
+        return car;
+    }
+
+    public Customer getCustomer() {
+        return customer;
     }
 
     public void setDescription(String description) {
@@ -49,14 +70,7 @@ public class Order {
         this.customer = customer;
     }
 
-    @Override
-    public String toString() {
-        return "Order{" +
-                "createdAt=" + createdAt +
-                ", car=" + car +
-                ", customer=" + customer +
-                '}';
-    }
+
 
     public Timestamp getCreatedAt() {
         return createdAt;

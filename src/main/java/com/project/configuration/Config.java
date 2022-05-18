@@ -17,7 +17,6 @@ import java.util.Properties;
 
 @ComponentScan(basePackages = "com.project")
 @EnableTransactionManagement
-//@EnableWebMvc
 @Configuration
 @PropertySource(value = {"classpath:application.properties"})
 public class Config {
@@ -53,7 +52,7 @@ public class Config {
         }
 
         @Bean
-        @Autowired
+//        @Autowired
         public HibernateTransactionManager transactionManager() {
             HibernateTransactionManager txManager = new HibernateTransactionManager();
             txManager.setSessionFactory(sessionFactory().getObject());

@@ -1,6 +1,9 @@
 package com.project.model;
 
+
 import javax.persistence.*;
+import javax.validation.constraints.Size;
+
 import java.util.Set;
 import java.util.UUID;
 
@@ -14,16 +17,22 @@ public class Customer {
     private UUID id;
 
     @Column(name="first_name")
+    @Size(min = 3, message = "firstName too short")
+    @Size(max = 20, message = "firstName too long")
     private String firstName;
 
     @Column(name="last_name")
     private String lastName;
+
 
     @Column(name="email", unique = true)
     private String email;
 
     @Column(name="phone")
     private String phone;
+
+    @OneToMany(mappedBy="customer")
+    private Set<Order> orders;
 
     @Override
     public String toString() {
@@ -33,8 +42,18 @@ public class Customer {
                 '}';
     }
 
-    @OneToMany(mappedBy="customer")
-    private Set<Order> orders;
+    public UUID getId() {
+        return id;
+    }
+
+//    public Set<Order> getOrders() {
+//        return orders;
+//    }
+
+    private void setOrders(Set<Order> orders) {
+        this.orders = orders;
+    }
+
 
 
     public String getFirstName() {

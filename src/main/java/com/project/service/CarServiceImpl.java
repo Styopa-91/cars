@@ -12,7 +12,6 @@ import java.util.UUID;
 
 @Service
 @Transactional
-//@EnableTransactionManagement
 public class CarServiceImpl implements CarService{
     @Autowired
     private CarDao carDao;

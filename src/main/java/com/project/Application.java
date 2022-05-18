@@ -15,41 +15,49 @@ import java.util.UUID;
 
 public class Application {
     public static void main(String[] args) {
-        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(Config.class);
-        System.out.println("Hello");
+//        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(Config.class);
+//        System.out.println("Hello");
+//
+//        CustomerService customerService = applicationContext.getBean(CustomerService.class);
+//        CarService carService = applicationContext.getBean(CarService.class);
+//        OrderService orderService = applicationContext.getBean(OrderService.class);
+//        System.out.println(orderService.all());
+//        Order order = orderService.getById(UUID.fromString("b340fd3e-69f9-48e8-bdc4-863cf8d9165b"));
+//        orderService.delete(order);
 
-        CustomerService customerService = applicationContext.getBean(CustomerService.class);
-        CarService carService = applicationContext.getBean(CarService.class);
-        OrderService orderService = applicationContext.getBean(OrderService.class);
-//        Order order12 = orderService.getById(UUID.fromString("a412335b-2656-4892-aadc-16871aead40f"));
-//        orderService.delete(order12);
-//
 //        Order order1 = new Order();
+
+//        Customer cust = customerService.getById(UUID.fromString("a77fcc15-6800-4422-ad07-70a5d35417b6"));
 //
-        Customer cust = customerService.getById(UUID.fromString("a1cb5021-493f-432e-a50d-7c82a8739c2a"));
-        Car car = carService.getById(UUID.fromString("cf52aa02-5a78-437b-bc10-191b4b49ffad"));
-//          carService.delete(car3);
-        orderService.create("first desc",cust,car);
+//        cust.setPhone("333333333");
+//        customerService.delete(cust);
+//        Car car = carService.getById(UUID.fromString("bc522539-3314-45ff-adb8-fef5b623fef4"));
+//
+//        System.out.println(orderService.all());
+//          carService.delete(car);
+//        orderService.create("order_6", cust, car);
 //        orderService.add(order2);
 
-//        Customer cust1 = new Customer();
-//        cust1.setFirstName("ivan");
-//        cust1.setLastName("petrenko");
-//        cust1.setEmail("ddd@gmail.com");
-//        cust1.setPhone("05055555555");
-//        customerService.add(cust1);
+//        Customer cust = new Customer();
+//        cust.setFirstName("");
+//        cust.setLastName("biden");
+//        cust.setEmail("77777107@gmail.com");
+//        cust.setPhone("0507757677");
+//        customerService.add(cust);
+
+//        System.out.println(customerService.all());
 //
 //
-//        customerService.delete(cust2);
+//        customerService.add(cust);
 
 //
 
-//        Car car1 = new Car();
-//        car1.setModel("mercedes_E");
-//        car1.setColor("white");
-//        car1.setPrice(7000);
+//        Car car = new Car();
+//        car.setModel("bmw_3");
+//        car.setColor("gray");
+//        car.setPrice(6000);
 //
-//          carService.add(car1);
+//        carService.add(car);
 //        carService.delete(car3);
 
 //        System.out.println(carService.all());

@@ -20,7 +20,6 @@ public class Car {
     @Column(name="price")
     private float price;
 
-
     @OneToOne(mappedBy = "car")
     private Order order;
 
@@ -33,6 +32,14 @@ public class Car {
                 '}';
     }
 
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    private void setOrder(Order order) {
+        this.order = order;
+    }
+
     public String getModel() {
         return model;
     }
@@ -40,6 +47,11 @@ public class Car {
     public void setModel(String model) {
         this.model = model;
     }
+
+    public UUID getId() { return id;
+    }
+//    public Order getOrder() { return order;
+//    }
 
     public String getColor() {
         return color;

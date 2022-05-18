@@ -4,10 +4,25 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.lang.reflect.ParameterizedType;
+import java.util.List;
+import java.util.UUID;
+
 public abstract class GenericDaoImpl <T> implements GenericDao <T>{
     @Autowired
     private SessionFactory sessionFactory;
 
+    @Override
+    public Class<T> getClas(){
+        return (Class<T>) ((ParameterizedType) getClass()
+                .getGenericSuperclass()).getActualTypeArguments()[0];
+    }
+
+    @Override
+    public List<T> all(){
+        Session session = sessionFactory.getCurrentSession();
+        return session.createQuery("from "+ getClas().getName(), getClas()).getResultList();
+    }
 
 
     @Override
@@ -28,9 +43,9 @@ public abstract class GenericDaoImpl <T> implements GenericDao <T>{
         session.update(t);
     }
 
-//    @Override
-//    public T getById(UUID id) {
-//        Session session = sessionFactory.getCurrentSession();
-//        return session.get(T.class, id);
-//    }
+    @Override
+    public T getById(UUID id) {
+        Session session = sessionFactory.getCurrentSession();
+        return session.get(getClas(), id);
+    }
 }

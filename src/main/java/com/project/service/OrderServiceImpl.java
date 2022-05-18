@@ -24,21 +24,20 @@ public class OrderServiceImpl implements OrderService {
     private CarDao carDao;
 
     @Override
-    public List<Order> all() {
-        return orderDao.all();
+    public List<Order> all() { return orderDao.all();
     }
 
 
-
-    public void create(String description,Customer customer, Car car){
+    public void create(String description, Customer customer, Car car) {
         Order order = new Order();
         order.setDescription(description);
-        order.setCustomer(customer);
-        order.setCar(car);
+        order.setCustomer(customerDao.getById(customer.getId()));
+        order.setCar(carDao.getById(car.getId()));
 
 
-        this.add(order);
+        orderDao.add(order);
     }
+
     @Override
     public void add(Order order) {
         orderDao.add(order);
@@ -56,6 +55,8 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Order getById(UUID id) {
-        return orderDao.getById(id);
+        Order order = orderDao.getById(id);
+//        order.getCustomer();
+        return order;
     }
 }
