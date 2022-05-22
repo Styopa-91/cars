@@ -47,11 +47,7 @@
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
-    <open-files>
-      <object connection-id="dcc7cb98-a2fe-46b2-bf69-afe427f2cf93" object-ref="schemas/public/tables/car" />
-      <object connection-id="dcc7cb98-a2fe-46b2-bf69-afe427f2cf93" object-ref="schemas/public/tables/orders" />
-      <object connection-id="dcc7cb98-a2fe-46b2-bf69-afe427f2cf93" object-ref="schemas/public/tables/customer" />
-    </open-files>
+    <open-files />
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
     <connection id="dcc7cb98-a2fe-46b2-bf69-afe427f2cf93" />

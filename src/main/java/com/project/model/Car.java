@@ -20,7 +20,7 @@ public class Car {
     @Column(name="price")
     private float price;
 
-    @OneToOne(mappedBy = "car")
+    @OneToOne(mappedBy = "car",fetch = FetchType.LAZY)
     private Order order;
 
     @Override
@@ -31,14 +31,17 @@ public class Car {
                 ", price=" + price +
                 '}';
     }
+    public UUID getId() { return id;  }
 
     public void setId(UUID id) {
         this.id = id;
     }
 
-    private void setOrder(Order order) {
+    public void setOrder(Order order) {
         this.order = order;
     }
+
+    public Order getOrder() { return order;  }
 
     public String getModel() {
         return model;
@@ -47,11 +50,6 @@ public class Car {
     public void setModel(String model) {
         this.model = model;
     }
-
-    public UUID getId() { return id;
-    }
-//    public Order getOrder() { return order;
-//    }
 
     public String getColor() {
         return color;

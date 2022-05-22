@@ -1,14 +1,13 @@
 package com.project.service;
 
-import com.project.model.Customer;
-
+import com.project.DTO.CustomerDTO;
 import java.util.List;
 import java.util.UUID;
 
 public interface CustomerService {
-    List<Customer> all();
-    void add(Customer customer);
-    void delete(Customer customer);
-    void edit(Customer customer);
-    Customer getById(UUID id);
+    List<CustomerDTO> all();
+    CustomerDTO add(CustomerDTO customerWithoutOrdersDTO);
+    void delete(UUID id);
+    CustomerDTO edit(CustomerDTO customerDTO);
+    CustomerDTO getById(UUID id);
 }

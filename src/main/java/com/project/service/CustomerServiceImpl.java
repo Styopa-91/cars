@@ -1,11 +1,12 @@
 package com.project.service;
 
+import com.project.DTO.CustomerDTO;
 import com.project.dao.CustomerDao;
+import com.project.mapper.CustomerMapper;
 import com.project.model.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
 import java.util.UUID;
 
@@ -17,27 +18,33 @@ public class CustomerServiceImpl implements CustomerService {
     private CustomerDao customerDao;
 
     @Override
-    public List<Customer> all() {
-        return customerDao.all();
+    public List<CustomerDTO> all() {
+        return CustomerMapper.INSTANCE.customerToCustomerDTOList(customerDao.all());
     }
 
     @Override
-    public void add(Customer customer) {
+    public CustomerDTO getById(UUID id) {
+        Customer customer = customerDao.getById(id);
+        return CustomerMapper.INSTANCE.customerToCustomerDTO(customer);
+    }
+
+    @Override
+    public CustomerDTO add(CustomerDTO customerDTO) {
+        Customer customer = CustomerMapper.INSTANCE.customerDTOToCustomer(customerDTO);
         customerDao.add(customer);
+        return CustomerMapper.INSTANCE.customerToCustomerDTO(customer);
     }
 
     @Override
-    public void delete(Customer customer) {
-        customerDao.delete(customer);
-    }
-
-    @Override
-    public void edit(Customer customer) {
+    public CustomerDTO edit(CustomerDTO customerDTO) {
+        Customer customer = CustomerMapper.INSTANCE.customerDTOToCustomer(customerDTO);
         customerDao.edit(customer);
+        return CustomerMapper.INSTANCE.customerToCustomerDTO(customer);
     }
 
     @Override
-    public Customer getById(UUID id) {
-        return customerDao.getById(id);
+    public void delete(UUID id) {
+        customerDao.delete(id);
     }
+
 }

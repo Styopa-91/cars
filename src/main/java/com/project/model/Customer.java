@@ -1,10 +1,8 @@
 package com.project.model;
 
-
 import javax.persistence.*;
 import javax.validation.constraints.Size;
-
-import java.util.Set;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -32,7 +30,7 @@ public class Customer {
     private String phone;
 
     @OneToMany(mappedBy="customer")
-    private Set<Order> orders;
+    private List<Order> orders;
 
     @Override
     public String toString() {
@@ -46,15 +44,13 @@ public class Customer {
         return id;
     }
 
-//    public Set<Order> getOrders() {
-//        return orders;
-//    }
-
-    private void setOrders(Set<Order> orders) {
-        this.orders = orders;
+    public List<Order> getOrders() {
+        return orders;
     }
 
-
+    private void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
 
     public String getFirstName() {
         return firstName;
@@ -87,7 +83,5 @@ public class Customer {
     public void setPhone(String phone) {
         this.phone = phone;
     }
-
-
 
 }

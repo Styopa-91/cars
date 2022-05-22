@@ -1,15 +1,20 @@
 package com.project.service;
 
+import com.project.DTO.CarDTO;
+import com.project.DTO.CustomerDTO;
+import com.project.DTO.OrderDTO;
 import com.project.dao.CarDao;
 import com.project.dao.CustomerDao;
 import com.project.dao.OrderDao;
+import com.project.mapper.CarMapper;
+import com.project.mapper.CustomerMapper;
+import com.project.mapper.OrderMapper;
 import com.project.model.Car;
 import com.project.model.Customer;
 import com.project.model.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
 import java.util.UUID;
 
@@ -24,39 +29,46 @@ public class OrderServiceImpl implements OrderService {
     private CarDao carDao;
 
     @Override
-    public List<Order> all() { return orderDao.all();
-    }
-
-
-    public void create(String description, Customer customer, Car car) {
-        Order order = new Order();
-        order.setDescription(description);
-        order.setCustomer(customerDao.getById(customer.getId()));
-        order.setCar(carDao.getById(car.getId()));
-
-
-        orderDao.add(order);
+    public List<OrderDTO> all() {
+        return OrderMapper.INSTANCE.orderToOrderDTOList(orderDao.all());
     }
 
     @Override
-    public void add(Order order) {
-        orderDao.add(order);
-    }
-
-    @Override
-    public void delete(Order order) {
-        orderDao.delete(order);
-    }
-
-    @Override
-    public void edit(Order order) {
-        orderDao.edit(order);
-    }
-
-    @Override
-    public Order getById(UUID id) {
+    public OrderDTO getById(UUID id) {
         Order order = orderDao.getById(id);
 //        order.getCustomer();
-        return order;
+        return OrderMapper.INSTANCE.orderToOrderDTO(order);
     }
+
+    @Override
+    public OrderDTO create(String description, CustomerDTO customerDTO, CarDTO carDTO) {
+
+        Order order = new Order();
+        Customer customer = CustomerMapper.INSTANCE.customerDTOToCustomer(customerDTO);
+        Car car = CarMapper.INSTANCE.carDTOToCar(carDTO);
+        order.setCustomer(customer);
+        order.setCar(car);
+        order.setDescription(description);
+        orderDao.add(order);
+        return  OrderMapper.INSTANCE.orderToOrderDTO(order);
+    }
+
+//    @Override
+//    public OrderDTO add(OrderDTO orderDTO) {
+//        Order order = OrderMapper.INSTANCE.orderDTOToOrder(orderDTO);
+//        orderDao.add(order);
+//        return OrderMapper.INSTANCE.orderToOrderDTO(order);
+//    }
+
+    @Override
+    public OrderDTO edit(OrderDTO orderDTO) {
+        Order order = OrderMapper.INSTANCE.orderDTOToOrder(orderDTO);
+        return OrderMapper.INSTANCE.orderToOrderDTO(order);
+    }
+
+    @Override
+    public void delete(UUID id) {
+        orderDao.delete(id);
+    }
+
 }
