@@ -52,7 +52,6 @@ public class Config {
         }
 
         @Bean
-//        @Autowired
         public HibernateTransactionManager transactionManager() {
             HibernateTransactionManager txManager = new HibernateTransactionManager();
             txManager.setSessionFactory(sessionFactory().getObject());

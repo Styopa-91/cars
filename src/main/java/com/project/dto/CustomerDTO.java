@@ -1,55 +1,31 @@
-package com.project.model;
+package com.project.dto;
 
-import javax.persistence.*;
 import javax.validation.constraints.Size;
-import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
-@Entity
-@Table(name="customers")
-public class Customer {
+public class CustomerDTO {
 
-    @Id
-    @GeneratedValue
-    @Column(name="id")
     private UUID id;
 
-    @Column(name="first_name")
     @Size(min = 3, message = "firstName too short")
-    @Size(max = 20, message = "firstName too long")
+    @Size(max = 200, message = "firstName too long")
     private String firstName;
 
-    @Column(name="last_name")
     private String lastName;
 
-
-    @Column(name="email", unique = true)
     private String email;
 
-    @Column(name="phone")
     private String phone;
 
-    @OneToMany(mappedBy="customer")
-    private List<Order> orders;
-
-    @Override
-    public String toString() {
-        return "Customer{" +
-                "firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                '}';
-    }
+    private Set<OrderWithoutCarAndCustomerDTO> orders;
 
     public UUID getId() {
         return id;
     }
 
-    public List<Order> getOrders() {
-        return orders;
-    }
-
-    private void setOrders(List<Order> orders) {
-        this.orders = orders;
+    public void setId(UUID id) {
+        this.id = id;
     }
 
     public String getFirstName() {
@@ -84,7 +60,11 @@ public class Customer {
         this.phone = phone;
     }
 
-    public void setId(UUID id) {
-        this.id = id;
+    public Set<OrderWithoutCarAndCustomerDTO> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(Set<OrderWithoutCarAndCustomerDTO> orders) {
+        this.orders = orders;
     }
 }

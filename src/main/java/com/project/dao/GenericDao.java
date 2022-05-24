@@ -6,9 +6,9 @@ import java.util.UUID;
 public interface GenericDao <T>{
     Class<T> getClas();
     public List<T> all();
-    void add(T t);
-    void delete(T t);
-    void edit(T t);
+    T add(T t);
+    void delete(UUID id);
+    T edit(T t);
     public T getById(UUID id);
 
 }

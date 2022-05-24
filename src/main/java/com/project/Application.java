@@ -1,6 +1,6 @@
-package com.project;
+//package com.project;
 
-import com.project.configuration.Config;
+
 import com.project.model.Car;
 import com.project.model.Customer;
 import com.project.model.Order;
@@ -12,9 +12,9 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 import java.util.UUID;
 
-
-public class Application {
-    public static void main(String[] args) {
+//
+//public class Application {
+//    public static void main(String[] args) {
 //        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(Config.class);
 //        System.out.println("Hello");
 //
@@ -60,6 +60,6 @@ public class Application {
 //        carService.add(car);
 //        carService.delete(car3);
 
-//        System.out.println(carService.all());
-    }
-}
+////        System.out.println(carService.all());
+//    }
+//}

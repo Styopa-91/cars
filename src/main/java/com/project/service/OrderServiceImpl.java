@@ -2,14 +2,15 @@ package com.project.service;
 
 import com.project.dao.CarDao;
 import com.project.dao.CustomerDao;
+import com.project.dto.OrderDTO;
 import com.project.dao.OrderDao;
-import com.project.model.Car;
-import com.project.model.Customer;
+import com.project.mapper.CarMapper;
+import com.project.mapper.CustomerWithoutOrdersMapper;
+import com.project.mapper.OrderMapper;
 import com.project.model.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
 import java.util.UUID;
 
@@ -19,44 +20,43 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private OrderDao orderDao;
     @Autowired
+    private OrderMapper orderMapper;
+    @Autowired
+    private CarMapper carMapper;
+    @Autowired
+    private CustomerWithoutOrdersMapper customerWithoutOrdersMapper;
+    @Autowired
     private CustomerDao customerDao;
     @Autowired
     private CarDao carDao;
 
     @Override
-    public List<Order> all() { return orderDao.all();
-    }
-
-
-    public void create(String description, Customer customer, Car car) {
-        Order order = new Order();
-        order.setDescription(description);
-        order.setCustomer(customerDao.getById(customer.getId()));
-        order.setCar(carDao.getById(car.getId()));
-
-
-        orderDao.add(order);
+    public List<OrderDTO> all() {
+        return orderMapper.orderToOrderDTOList(orderDao.all());
     }
 
     @Override
-    public void add(Order order) {
-        orderDao.add(order);
-    }
-
-    @Override
-    public void delete(Order order) {
-        orderDao.delete(order);
-    }
-
-    @Override
-    public void edit(Order order) {
-        orderDao.edit(order);
-    }
-
-    @Override
-    public Order getById(UUID id) {
+    public OrderDTO getById(UUID id) {
         Order order = orderDao.getById(id);
-//        order.getCustomer();
-        return order;
+        return orderMapper.orderToOrderDTO(order);
     }
+
+    @Override
+    public OrderDTO create(OrderDTO orderDTO) {
+
+        Order order = orderMapper.orderDTOToOrder(orderDTO);
+        return  orderMapper.orderToOrderDTO(orderDao.add(order));
+    }
+
+    @Override
+    public OrderDTO edit(OrderDTO orderDTO) {
+        Order order = orderMapper.orderDTOToOrder(orderDTO);
+        return orderMapper.orderToOrderDTO(orderDao.edit(order));
+    }
+
+    @Override
+    public void delete(UUID id) {
+        orderDao.delete(id);
+    }
+
 }

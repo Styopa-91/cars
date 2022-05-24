@@ -1,16 +1,13 @@
 package com.project.service;
 
-import com.project.model.Car;
-import com.project.model.Customer;
-import com.project.model.Order;
+import com.project.dto.OrderDTO;
 import java.util.List;
 import java.util.UUID;
 
 public interface OrderService {
-    List<Order> all();
-    void create(String description, Customer customer, Car car);
-    void add(Order order);
-    void delete(Order order);
-    void edit(Order order);
-    Order getById(UUID id);
+    List<OrderDTO> all();
+    OrderDTO create(OrderDTO orderDTO);
+    OrderDTO edit(OrderDTO orderDTO);
+    OrderDTO getById(UUID id);
+    void delete(UUID id);
 }
