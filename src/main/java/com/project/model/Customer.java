@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Entity
-@Table(name="customer")
+@Table(name="customers")
 public class Customer {
 
     @Id
@@ -84,4 +84,7 @@ public class Customer {
         this.phone = phone;
     }
 
+    public void setId(UUID id) {
+        this.id = id;
+    }
 }

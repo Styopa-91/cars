@@ -1,6 +1,6 @@
 package com.project.controller;
 
-import com.project.DTO.CarDTO;
+import com.project.dto.CarDTO;
 import com.project.service.CarService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

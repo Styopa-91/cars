@@ -1,6 +1,7 @@
 package com.project.controller;
 
-import com.project.DTO.CustomerDTO;
+import com.project.dto.CustomerDTO;
+import com.project.dto.CustomerWithoutOrdersDTO;
 import com.project.service.CustomerService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -33,8 +34,8 @@ public class CustomerController {
 
     }
     @PutMapping
-    public CustomerDTO edit(@RequestBody CustomerDTO customerDTO){
-        return customerService.edit(customerDTO);
+    public CustomerWithoutOrdersDTO edit(@RequestBody CustomerWithoutOrdersDTO customerWithoutOrdersDTO){
+        return customerService.edit(customerWithoutOrdersDTO);
     }
 
     @DeleteMapping(value = "/{id}")

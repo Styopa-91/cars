@@ -1,12 +1,11 @@
-package com.project.DTO;
+package com.project.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.hibernate.annotations.CreationTimestamp;
 import java.sql.Timestamp;
 import java.util.UUID;
 
-public class OrderDTO {
-
+public class OrderWithoutCarAndCustomerDTO {
     private UUID id;
 
     private String description;
@@ -14,26 +13,6 @@ public class OrderDTO {
     @CreationTimestamp
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "ss-MM-yyyy hh:mm:ss")
     private Timestamp createdAt;
-
-    private CustomerWithoutOrdersDTO customer;
-
-    private CarDTO car;
-
-    public CarDTO getCar() {
-        return car;
-    }
-
-    public void setCar(CarDTO car) {
-        this.car = car;
-    }
-
-    public CustomerWithoutOrdersDTO getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(CustomerWithoutOrdersDTO customer) {
-        this.customer = customer;
-    }
 
     public UUID getId() {
         return id;
@@ -58,4 +37,5 @@ public class OrderDTO {
     public void setCreatedAt(Timestamp createdAt) {
         this.createdAt = createdAt;
     }
+
 }

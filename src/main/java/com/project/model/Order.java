@@ -6,7 +6,6 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.UUID;
 
-
 @Entity
 @Table(name="orders", uniqueConstraints = {
         @UniqueConstraint(name = "UniqueCustomerAndCar", columnNames = {"car_id", "customer_id"})})
@@ -41,37 +40,37 @@ public class Order {
                 '}';
     }
 
-    public String getDescription() {
-        return description;
-    }
-
     public UUID getId() {
         return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
     }
 
     public Car getCar() {
         return car;
     }
 
+    public void setCar(Car car) {
+        this.car = car;
+    }
+
     public Customer getCustomer() {
         return customer;
+    }
+
+    public void setCustomer(Customer customer) { this.customer = customer; }
+
+    public String getDescription() {
+        return description;
     }
 
     public void setDescription(String description) {
         this.description = description;
     }
 
-    public void setCar(Car car) {
-        this.car = car;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
-
-    public Timestamp getCreatedAt() {
-        return createdAt;
-    }
+    public Timestamp getCreatedAt() { return createdAt; }
 
     public void setCreatedAt(Timestamp createdAt) {
         this.createdAt = createdAt;

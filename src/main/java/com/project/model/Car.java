@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.UUID;
 
 @Entity
-@Table(name = "car")
+@Table(name = "cars")
 public class Car {
     @Id
     @GeneratedValue
@@ -37,12 +37,6 @@ public class Car {
         this.id = id;
     }
 
-    public void setOrder(Order order) {
-        this.order = order;
-    }
-
-    public Order getOrder() { return order;  }
-
     public String getModel() {
         return model;
     }
@@ -66,4 +60,11 @@ public class Car {
     public void setPrice(float price) {
         this.price = price;
     }
+
+    public Order getOrder() { return order;  }
+
+    public void setOrder(Order order) {
+        this.order = order;
+    }
+
 }

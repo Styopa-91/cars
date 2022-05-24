@@ -1,16 +1,12 @@
 package com.project.service;
 
-import com.project.DTO.CarDTO;
-import com.project.DTO.CustomerDTO;
-import com.project.DTO.OrderDTO;
 import com.project.dao.CarDao;
 import com.project.dao.CustomerDao;
+import com.project.dto.OrderDTO;
 import com.project.dao.OrderDao;
 import com.project.mapper.CarMapper;
-import com.project.mapper.CustomerMapper;
+import com.project.mapper.CustomerWithoutOrdersMapper;
 import com.project.mapper.OrderMapper;
-import com.project.model.Car;
-import com.project.model.Customer;
 import com.project.model.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,46 +20,38 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private OrderDao orderDao;
     @Autowired
+    private OrderMapper orderMapper;
+    @Autowired
+    private CarMapper carMapper;
+    @Autowired
+    private CustomerWithoutOrdersMapper customerWithoutOrdersMapper;
+    @Autowired
     private CustomerDao customerDao;
     @Autowired
     private CarDao carDao;
 
     @Override
     public List<OrderDTO> all() {
-        return OrderMapper.INSTANCE.orderToOrderDTOList(orderDao.all());
+        return orderMapper.orderToOrderDTOList(orderDao.all());
     }
 
     @Override
     public OrderDTO getById(UUID id) {
         Order order = orderDao.getById(id);
-//        order.getCustomer();
-        return OrderMapper.INSTANCE.orderToOrderDTO(order);
+        return orderMapper.orderToOrderDTO(order);
     }
 
     @Override
-    public OrderDTO create(String description, CustomerDTO customerDTO, CarDTO carDTO) {
+    public OrderDTO create(OrderDTO orderDTO) {
 
-        Order order = new Order();
-        Customer customer = CustomerMapper.INSTANCE.customerDTOToCustomer(customerDTO);
-        Car car = CarMapper.INSTANCE.carDTOToCar(carDTO);
-        order.setCustomer(customer);
-        order.setCar(car);
-        order.setDescription(description);
-        orderDao.add(order);
-        return  OrderMapper.INSTANCE.orderToOrderDTO(order);
+        Order order = orderMapper.orderDTOToOrder(orderDTO);
+        return  orderMapper.orderToOrderDTO(orderDao.add(order));
     }
-
-//    @Override
-//    public OrderDTO add(OrderDTO orderDTO) {
-//        Order order = OrderMapper.INSTANCE.orderDTOToOrder(orderDTO);
-//        orderDao.add(order);
-//        return OrderMapper.INSTANCE.orderToOrderDTO(order);
-//    }
 
     @Override
     public OrderDTO edit(OrderDTO orderDTO) {
-        Order order = OrderMapper.INSTANCE.orderDTOToOrder(orderDTO);
-        return OrderMapper.INSTANCE.orderToOrderDTO(order);
+        Order order = orderMapper.orderDTOToOrder(orderDTO);
+        return orderMapper.orderToOrderDTO(orderDao.edit(order));
     }
 
     @Override

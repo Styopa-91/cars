@@ -1,8 +1,10 @@
 package com.project.service;
 
-import com.project.DTO.CustomerDTO;
+import com.project.dto.CustomerDTO;
 import com.project.dao.CustomerDao;
+import com.project.dto.CustomerWithoutOrdersDTO;
 import com.project.mapper.CustomerMapper;
+import com.project.mapper.CustomerWithoutOrdersMapper;
 import com.project.model.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,30 +18,34 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Autowired
     private CustomerDao customerDao;
+    @Autowired
+    private CustomerMapper customerMapper;
+    @Autowired
+    private CustomerWithoutOrdersMapper customerWithoutOrdersMapper;
 
     @Override
     public List<CustomerDTO> all() {
-        return CustomerMapper.INSTANCE.customerToCustomerDTOList(customerDao.all());
+        return customerMapper.customerToCustomerDTOList(customerDao.all());
     }
 
     @Override
     public CustomerDTO getById(UUID id) {
         Customer customer = customerDao.getById(id);
-        return CustomerMapper.INSTANCE.customerToCustomerDTO(customer);
+        return customerMapper.customerToCustomerDTO(customer);
     }
 
     @Override
     public CustomerDTO add(CustomerDTO customerDTO) {
-        Customer customer = CustomerMapper.INSTANCE.customerDTOToCustomer(customerDTO);
+        Customer customer = customerMapper.customerDTOToCustomer(customerDTO);
         customerDao.add(customer);
-        return CustomerMapper.INSTANCE.customerToCustomerDTO(customer);
+        return customerMapper.customerToCustomerDTO(customer);
     }
 
     @Override
-    public CustomerDTO edit(CustomerDTO customerDTO) {
-        Customer customer = CustomerMapper.INSTANCE.customerDTOToCustomer(customerDTO);
+    public CustomerWithoutOrdersDTO edit(CustomerWithoutOrdersDTO customerWithoutOrdersDTO) {
+        Customer customer = customerWithoutOrdersMapper.customerWithoutOrdersDTOToCustomer(customerWithoutOrdersDTO);
         customerDao.edit(customer);
-        return CustomerMapper.INSTANCE.customerToCustomerDTO(customer);
+        return customerWithoutOrdersMapper.customerToCustomerWithoutOrdersDTO(customer);
     }
 
     @Override

@@ -1,6 +1,6 @@
 package com.project.service;
 
-import com.project.DTO.CarDTO;
+import com.project.dto.CarDTO;
 import com.project.dao.CarDao;
 import com.project.mapper.CarMapper;
 import com.project.model.Car;
@@ -15,18 +15,31 @@ import java.util.UUID;
 public class CarServiceImpl implements CarService{
     @Autowired
     private CarDao carDao;
+    @Autowired
+    private CarMapper carMapper;
 
     @Override
     public List<CarDTO> all() {
+        return carMapper.carToCarDTOList(carDao.all());
+    }
 
-        return CarMapper.INSTANCE.carToCarDTOList(carDao.all());
+    @Override
+    public CarDTO getById(UUID id) {
+        Car car = carDao.getById(id);
+        return carMapper.carToCarDTO(car);
     }
 
     @Override
     public CarDTO add(CarDTO carDTO) {
-        Car car = CarMapper.INSTANCE.carDTOToCar(carDTO);
+        Car car = carMapper.carDTOToCar(carDTO);
         carDao.add(car);
-        return CarMapper.INSTANCE.carToCarDTO(car);
+        return carMapper.carToCarDTO(car);
+    }
+
+    @Override
+    public CarDTO edit(CarDTO carDTO) {
+        Car car = carMapper.carDTOToCar(carDTO);
+        return carMapper.carToCarDTO(carDao.edit(car));
     }
 
     @Override
@@ -34,16 +47,4 @@ public class CarServiceImpl implements CarService{
         carDao.delete(id);
     }
 
-    @Override
-    public CarDTO edit(CarDTO carDTO) {
-        Car car = CarMapper.INSTANCE.carDTOToCar(carDTO);
-        return CarMapper.INSTANCE.carToCarDTO(carDao.edit(car));
-    }
-
-    @Override
-    public CarDTO getById(UUID id) {
-
-        Car car = carDao.getById(id);
-        return CarMapper.INSTANCE.carToCarDTO(car);
-    }
 }

@@ -1,15 +1,11 @@
-package com.project.DTO;
+package com.project.dto;
 
-import javax.validation.constraints.Size;
-import java.util.Set;
 import java.util.UUID;
 
-public class CustomerDTO {
+public class CustomerWithoutOrdersDTO {
 
     private UUID id;
 
-    @Size(min = 3, message = "firstName too short")
-    @Size(max = 200, message = "firstName too long")
     private String firstName;
 
     private String lastName;
@@ -17,8 +13,6 @@ public class CustomerDTO {
     private String email;
 
     private String phone;
-
-    private Set<OrderWithoutCarAndCustomerDTO> orders;
 
     public UUID getId() {
         return id;
@@ -60,11 +54,4 @@ public class CustomerDTO {
         this.phone = phone;
     }
 
-    public Set<OrderWithoutCarAndCustomerDTO> getOrders() {
-        return orders;
-    }
-
-    public void setOrders(Set<OrderWithoutCarAndCustomerDTO> orders) {
-        this.orders = orders;
-    }
 }

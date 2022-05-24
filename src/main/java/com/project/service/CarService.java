@@ -1,6 +1,6 @@
 package com.project.service;
 
-import com.project.DTO.CarDTO;
+import com.project.dto.CarDTO;
 import java.util.List;
 import java.util.UUID;
 
