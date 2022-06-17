@@ -1,7 +1,6 @@
 package com.project.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import org.hibernate.annotations.CreationTimestamp;
 import java.sql.Timestamp;
 import java.util.UUID;
 
@@ -11,8 +10,8 @@ public class OrderDTO {
 
     private String description;
 
-    @CreationTimestamp
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "ss-MM-yyyy hh:mm:ss")
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm:ss", timezone="Europe/Bucharest")
     private Timestamp createdAt;
 
     private CustomerWithoutOrdersDTO customer;

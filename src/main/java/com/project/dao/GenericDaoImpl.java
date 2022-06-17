@@ -9,7 +9,7 @@ import java.util.UUID;
 
 public abstract class GenericDaoImpl <T> implements GenericDao <T>{
     @Autowired
-    private SessionFactory sessionFactory;
+    protected SessionFactory sessionFactory;
 
     @Override
     public Class<T> getClas(){
@@ -42,6 +42,10 @@ public abstract class GenericDaoImpl <T> implements GenericDao <T>{
         Session session = sessionFactory.getCurrentSession();
         session.update(t);
         return t;
+    }
+
+    public Session getSessionFactory() {
+        return sessionFactory.getCurrentSession();
     }
 
     @Override

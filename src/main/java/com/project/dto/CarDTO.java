@@ -12,6 +12,8 @@ public class CarDTO {
 
     private float price;
 
+    private String vin_code;
+
     public UUID getId() {
         return id;
     }
@@ -43,4 +45,8 @@ public class CarDTO {
     public void setPrice(float price) {
         this.price = price;
     }
+
+    public String getVin_code() { return vin_code; }
+
+    public void setVin_code(String vin_code) { this.vin_code = vin_code; }
 }

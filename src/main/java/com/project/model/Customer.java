@@ -1,6 +1,9 @@
 package com.project.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.List;
 import java.util.UUID;
@@ -17,16 +20,24 @@ public class Customer {
     @Column(name="first_name")
     @Size(min = 3, message = "firstName too short")
     @Size(max = 20, message = "firstName too long")
+    @NotBlank
     private String firstName;
 
     @Column(name="last_name")
+    @Size(min = 3, message = "lastName too short")
+    @Size(max = 20, message = "lastName too long")
+    @NotBlank
     private String lastName;
 
 
     @Column(name="email", unique = true)
+    @Email
     private String email;
 
     @Column(name="phone")
+    @NotBlank
+    @Size(min = 5, message = "phone too short")
+    @Size(max = 20, message = "phone too long")
     private String phone;
 
     @OneToMany(mappedBy="customer")

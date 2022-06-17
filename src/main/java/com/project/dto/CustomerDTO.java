@@ -1,6 +1,5 @@
 package com.project.dto;
 
-import javax.validation.constraints.Size;
 import java.util.Set;
 import java.util.UUID;
 
@@ -8,8 +7,6 @@ public class CustomerDTO {
 
     private UUID id;
 
-    @Size(min = 3, message = "firstName too short")
-    @Size(max = 200, message = "firstName too long")
     private String firstName;
 
     private String lastName;
