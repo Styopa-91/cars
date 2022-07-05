@@ -8,7 +8,8 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin
+//@CrossOrigin(origins = "http://localhost:90")
 @RequestMapping(value = "/order")
 public class OrderController {
     private final OrderService orderService;

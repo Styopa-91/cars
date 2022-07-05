@@ -1,0 +1,23 @@
+version: '3.9'
+
+services:
+
+  cars_postgres:
+    container_name: cars_postgres
+    image: postgres:14
+    environment:
+      POSTGRES_DB: "cars_db"
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "root"
+
+  tomcat:
+    build: .
+    ports:
+      - "8085:8080"
+
+  nginx_node:
+    build: ..\Java\SS_cars_front\cars_front\
+    ports:
+      - "90:80"
+
+
